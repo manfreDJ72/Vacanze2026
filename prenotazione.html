@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1A1F2E">
+<title>Prenotazione · Vacanze 2026 · Villa Sara Alghero</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+:root{--sand:#F5EFE0;--sea:#1A6B8A;--sea-light:#4DA8C7;--coral:#E07050;--night:#1A1F2E;--olive:#6B7A3E;--white:#FFF;--text:#2C2C2C;--muted:#6B6B6B;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--sand);color:var(--text);overflow-x:hidden;}
+
+/* ── MINI HERO ── */
+.mini-hero{background:var(--night);padding:2.5rem 1.5rem 2rem;text-align:center;}
+.mini-hero .eyebrow{font-size:0.68rem;font-weight:600;letter-spacing:0.25em;color:var(--sea-light);text-transform:uppercase;margin-bottom:0.6rem;}
+.mini-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);color:#fff;font-weight:700;}
+.mini-hero h1 span{font-style:italic;color:var(--sea-light);}
+.mini-hero .sub{color:rgba(255,255,255,.65);font-size:0.9rem;margin-top:0.5rem;font-weight:300;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:var(--night);display:flex;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+nav::-webkit-scrollbar{display:none;}
+nav a{color:rgba(255,255,255,0.7);text-decoration:none;padding:0.85rem 1rem;font-size:0.72rem;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-bottom .2s;flex-shrink:0;}
+nav a:hover,nav a.active{color:var(--sea-light);border-bottom-color:var(--sea-light);}
+
+/* ── SECTIONS ── */
+section{padding:3rem 1.2rem;}
+@media(min-width:600px){section{padding:4rem 1.5rem;}}
+.container{max-width:860px;margin:0 auto;}
+.section-label{font-size:0.68rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--sea);margin-bottom:0.5rem;}
+h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:700;line-height:1.2;color:var(--night);margin-bottom:1rem;}
+p{line-height:1.75;color:var(--muted);}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{background:var(--night);padding:1rem 1.5rem;}
+.progress-steps{display:flex;gap:0;max-width:500px;margin:0 auto;position:relative;}
+.progress-steps::before{content:'';position:absolute;top:14px;left:14px;right:14px;height:2px;background:rgba(255,255,255,.15);}
+.progress-line{position:absolute;top:14px;left:14px;height:2px;background:var(--sea-light);transition:width .4s ease;z-index:1;}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.4rem;position:relative;z-index:2;}
+.step-dot{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:rgba(255,255,255,.4);transition:all .3s;}
+.step.active .step-dot{background:var(--sea);border-color:var(--sea-light);color:#fff;}
+.step.done .step-dot{background:var(--olive);border-color:var(--olive);color:#fff;}
+.step-label{font-size:0.58rem;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:0.05em;text-align:center;}
+.step.active .step-label,.step.done .step-label{color:rgba(255,255,255,.7);}
+
+/* ── FORM PAGES ── */
+.form-page{display:none;}
+.form-page.active{display:block;}
+
+/* ── FORM ELEMENTS ── */
+.form-card{background:#fff;border-radius:18px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:1.2rem;}
+.form-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--night);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+.form-row{display:grid;grid-template-columns:1fr;gap:0.8rem;margin-bottom:0.8rem;}
+@media(min-width:480px){.form-row.two{grid-template-columns:1fr 1fr;}}
+@media(min-width:640px){.form-row.three{grid-template-columns:1fr 1fr 1fr;}}
+.form-group{display:flex;flex-direction:column;gap:0.35rem;}
+.form-group label{font-size:0.7rem;font-weight:600;color:var(--sea);letter-spacing:0.08em;text-transform:uppercase;}
+.form-group input,.form-group select,.form-group textarea{background:#F8F6F2;border:1.5px solid #E8E2D8;border-radius:10px;padding:0.7rem 0.9rem;color:var(--text);font-size:0.88rem;font-family:'Inter',sans-serif;transition:border-color .2s;-webkit-appearance:none;appearance:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--sea-light);background:#fff;}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group .hint{font-size:0.68rem;color:var(--muted);margin-top:0.15rem;}
+.required-star{color:var(--coral);}
+
+/* ── PARTECIPAZIONE CARDS ── */
+.part-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:0.7rem;margin-top:0.5rem;}
+@media(max-width:400px){.part-choices{grid-template-columns:1fr;}}
+.choice-card{border:2px solid #E8E2D8;border-radius:14px;padding:1rem 0.8rem;text-align:center;cursor:pointer;transition:all .2s;background:#fff;}
+.choice-card:hover{border-color:var(--sea-light);}
+.choice-card.selected{border-color:var(--sea);background:rgba(26,107,138,.05);}
+.choice-card.selected-coral{border-color:var(--coral);background:rgba(224,112,80,.05);}
+.choice-card.selected-olive{border-color:var(--olive);background:rgba(107,122,62,.05);}
+.choice-icon{font-size:1.8rem;margin-bottom:0.4rem;}
+.choice-label{font-size:0.78rem;font-weight:600;color:var(--night);}
+.choice-sub{font-size:0.68rem;color:var(--muted);margin-top:0.2rem;}
+
+/* ── CAMERE PICKER ── */
+.camere-floor{margin-top:0.5rem;}
+.floor-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1rem 0 0.5rem;}
+.camere-grid-pick{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;}
+@media(min-width:480px){.camere-grid-pick{grid-template-columns:repeat(3,1fr);}}
+.camera-pick{border:2px solid #E8E2D8;border-radius:12px;padding:0.9rem;cursor:pointer;transition:all .2s;background:#fff;position:relative;}
+.camera-pick:hover{border-color:var(--sea-light);}
+.camera-pick.selected{border-color:var(--sea);background:rgba(26,107,138,.06);}
+.camera-pick.occupied{border-color:#E0E0E0;background:#F5F5F5;cursor:default;opacity:.65;}
+.camera-pick .cp-icon{font-size:1.4rem;margin-bottom:0.3rem;}
+.camera-pick .cp-name{font-size:0.78rem;font-weight:600;color:var(--night);line-height:1.3;}
+.camera-pick .cp-desc{font-size:0.68rem;color:var(--muted);margin-top:0.2rem;line-height:1.4;}
+.camera-pick .cp-badge{position:absolute;top:0.5rem;right:0.5rem;font-size:0.58rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:50px;background:var(--sea);color:#fff;}
+.camera-pick.occupied .cp-badge{background:#ccc;}
+.camera-pick .cp-tag-sel{display:none;position:absolute;top:0.5rem;right:0.5rem;font-size:0.62rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:50px;background:var(--sea);color:#fff;}
+.camera-pick.selected .cp-tag-sel{display:block;}
+.camera-pick.selected .cp-badge{display:none;}
+
+/* ── TRASPORTO PICKER ── */
+.trasporto-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-top:0.5rem;}
+@media(min-width:480px){.trasporto-grid{grid-template-columns:repeat(4,1fr);}}
+.trasporto-pick{border:2px solid #E8E2D8;border-radius:12px;padding:0.9rem 0.6rem;text-align:center;cursor:pointer;transition:all .2s;background:#fff;}
+.trasporto-pick:hover{border-color:var(--sea-light);}
+.trasporto-pick.selected{border-color:var(--sea);background:rgba(26,107,138,.06);}
+.tp-icon{font-size:1.6rem;margin-bottom:0.3rem;}
+.tp-label{font-size:0.72rem;font-weight:600;color:var(--night);}
+
+/* ── COSTO RIEPILOGO ── */
+.costo-card{background:linear-gradient(135deg,var(--sea) 0%,var(--night) 100%);border-radius:16px;padding:1.5rem;color:#fff;margin-bottom:1.2rem;}
+.costo-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;}
+.costo-row{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);}
+.costo-row:last-of-type{border-bottom:none;}
+.costo-label{font-size:0.82rem;color:rgba(255,255,255,.75);}
+.costo-value{font-size:0.92rem;font-weight:600;color:#fff;}
+.costo-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding-top:1rem;border-top:2px solid rgba(255,255,255,.25);}
+.costo-total-label{font-size:0.85rem;font-weight:600;color:rgba(255,255,255,.8);}
+.costo-total-value{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;}
+.costo-acconto{display:inline-block;background:var(--coral);border-radius:50px;padding:0.5rem 1.2rem;font-size:0.82rem;font-weight:600;color:#fff;margin-top:1rem;}
+
+/* ── NAV BUTTONS ── */
+.form-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:1rem;}
+.btn-back{background:transparent;border:2px solid var(--sea);color:var(--sea);padding:0.8rem 1.5rem;border-radius:50px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-back:hover{background:var(--sea);color:#fff;}
+.btn-next{background:var(--sea);border:none;color:#fff;padding:0.8rem 2rem;border-radius:50px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:background .2s;flex:1;max-width:240px;}
+.btn-next:hover{background:#145a74;}
+.btn-submit{background:var(--coral);border:none;color:#fff;padding:0.9rem 2rem;border-radius:50px;font-size:0.92rem;font-weight:700;cursor:pointer;transition:background .2s;width:100%;margin-top:0.5rem;}
+.btn-submit:hover{background:#c75535;}
+
+/* ── CONFERMA ── */
+#page-conferma{display:none;}
+#page-conferma.active{display:block;}
+.conferma-box{background:#fff;border-radius:18px;padding:2.5rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.conferma-icon{font-size:4rem;margin-bottom:1rem;}
+.conferma-box h2{font-family:'Playfair Display',serif;color:var(--night);font-size:1.8rem;margin-bottom:0.8rem;}
+.conferma-box p{color:var(--muted);font-size:0.92rem;line-height:1.7;}
+.conferma-detail{background:var(--sand);border-radius:12px;padding:1.2rem;margin-top:1.5rem;text-align:left;}
+.conferma-detail .cd-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:0.85rem;}
+.conferma-detail .cd-row:last-child{border-bottom:none;}
+.cd-key{color:var(--muted);font-weight:400;}
+.cd-val{font-weight:600;color:var(--night);}
+.btn-back-home{display:inline-block;margin-top:1.5rem;background:var(--sea);color:#fff;text-decoration:none;padding:0.8rem 1.8rem;border-radius:50px;font-size:0.88rem;font-weight:600;}
+.btn-new{display:inline-block;margin-top:0.8rem;background:transparent;border:2px solid var(--sea);color:var(--sea);text-decoration:none;padding:0.7rem 1.5rem;border-radius:50px;font-size:0.85rem;font-weight:600;cursor:pointer;}
+
+/* ── DASHBOARD ── */
+#dashboard{background:var(--night);}
+#dashboard h2{color:#fff;}
+#dashboard .section-label{color:var(--sea-light);}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.7rem;margin-bottom:1.5rem;}
+@media(min-width:480px){.stat-grid{grid-template-columns:repeat(4,1fr);}}
+.stat-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.1rem;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1;}
+.stat-num.green{color:#6BD68A;}
+.stat-num.yellow{color:#F0C060;}
+.stat-num.red{color:#E07070;}
+.stat-num.blue{color:var(--sea-light);}
+.stat-label{font-size:0.7rem;color:rgba(255,255,255,.5);margin-top:0.4rem;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;}
+.part-list{display:flex;flex-direction:column;gap:0.5rem;}
+.part-row{display:flex;align-items:center;gap:0.8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:0.9rem 1rem;}
+.part-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;color:#fff;flex-shrink:0;}
+.part-main{flex:1;min-width:0;}
+.part-name{font-size:0.9rem;font-weight:600;color:#fff;}
+.part-meta{font-size:0.72rem;color:rgba(255,255,255,.5);margin-top:0.15rem;}
+.part-badges{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.3rem;}
+.pb{font-size:0.62rem;font-weight:600;padding:0.12rem 0.5rem;border-radius:50px;}
+.pb-si{background:rgba(107,214,138,.2);color:#6BD68A;}
+.pb-forse{background:rgba(240,192,96,.2);color:#F0C060;}
+.pb-no{background:rgba(224,112,112,.2);color:#E07070;}
+.pb-camera{background:rgba(77,168,199,.2);color:var(--sea-light);}
+.pb-trasporto{background:rgba(107,122,62,.2);color:#A0C060;}
+.pb-cane{background:rgba(255,200,100,.2);color:#D08020;}
+.part-date{font-size:0.65rem;color:rgba(255,255,255,.3);flex-shrink:0;}
+.camere-status{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-top:1.5rem;}
+@media(min-width:480px){.camere-status{grid-template-columns:repeat(3,1fr);}}
+.cs-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:0.9rem;}
+.cs-card.taken{border-color:var(--coral);background:rgba(224,112,80,.08);}
+.cs-card.free{border-color:rgba(107,214,138,.3);background:rgba(107,214,138,.05);}
+.cs-name{font-size:0.78rem;font-weight:600;color:#fff;}
+.cs-desc{font-size:0.65rem;color:rgba(255,255,255,.4);margin-top:0.2rem;}
+.cs-who{font-size:0.7rem;color:var(--sea-light);margin-top:0.5rem;font-weight:600;}
+.cs-who.free{color:rgba(107,214,138,.8);}
+.no-part{color:rgba(255,255,255,.4);font-size:0.85rem;text-align:center;padding:2rem 0;font-style:italic;}
+.clear-btn{background:transparent;border:1px solid rgba(255,50,50,.3);color:rgba(255,100,100,.7);padding:0.4rem 1rem;border-radius:50px;font-size:0.72rem;cursor:pointer;margin-top:1.5rem;}
+.clear-btn:hover{border-color:rgba(255,100,100,.6);color:rgba(255,120,120,.9);}
+
+/* ── FOOTER ── */
+footer{background:var(--night);color:rgba(255,255,255,.4);text-align:center;padding:2rem 1rem;font-size:0.78rem;}
+footer a{color:var(--sea-light);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- MINI HERO -->
+<div class="mini-hero">
+  <div class="eyebrow">Vacanze 2026 · Alghero · 17–30 Agosto</div>
+  <h1>Iscriviti a <span>Villa Sara</span></h1>
+  <div class="sub">1.200 € a persona · tutto incluso · 13 notti · Piscina privata</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">← Home</a>
+  <a href="#form" class="active">Iscrizione</a>
+  <a href="#dashboard">Chi viene</a>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="progress-steps">
+    <div class="progress-line" id="progress-line" style="width:0%"></div>
+    <div class="step active" id="step-1"><div class="step-dot">1</div><div class="step-label">Chi sei</div></div>
+    <div class="step" id="step-2"><div class="step-dot">2</div><div class="step-label">Partecipazione</div></div>
+    <div class="step" id="step-3"><div class="step-dot">3</div><div class="step-label">Camera</div></div>
+    <div class="step" id="step-4"><div class="step-dot">4</div><div class="step-label">Trasporto</div></div>
+    <div class="step" id="step-5"><div class="step-dot">5</div><div class="step-label">Riepilogo</div></div>
+  </div>
+</div>
+
+<!-- FORM SECTION -->
+<section id="form">
+  <div class="container">
+
+    <!-- PAGE 1: CHI SEI -->
+    <div class="form-page active" id="page-1">
+      <div class="section-label">Passo 1 di 5</div>
+      <h2>Iniziamo! Chi sei?</h2>
+      <div class="form-card">
+        <h3>👤 Dati personali</h3>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>Nome <span class="required-star">*</span></label>
+            <input type="text" id="p1-nome" placeholder="Marco">
+          </div>
+          <div class="form-group">
+            <label>Cognome <span class="required-star">*</span></label>
+            <input type="text" id="p1-cognome" placeholder="Rossi">
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>Email <span class="required-star">*</span></label>
+            <input type="email" id="p1-email" placeholder="marco@email.com">
+            <span class="hint">Per ricevere aggiornamenti sul gruppo</span>
+          </div>
+          <div class="form-group">
+            <label>Telefono / WhatsApp</label>
+            <input type="tel" id="p1-tel" placeholder="+39 333 1234567">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Città di partenza</label>
+            <input type="text" id="p1-citta" placeholder="Es. Torino">
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <div></div>
+        <button class="btn-next" onclick="nextPage(1)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- PAGE 2: PARTECIPAZIONE -->
+    <div class="form-page" id="page-2">
+      <div class="section-label">Passo 2 di 5</div>
+      <h2>Partecipi?</h2>
+      <div class="form-card">
+        <h3>🎉 La tua risposta</h3>
+        <div class="part-choices">
+          <div class="choice-card" id="choice-si" onclick="selectChoice('si')">
+            <div class="choice-icon">✅</div>
+            <div class="choice-label">Ci sono!</div>
+            <div class="choice-sub">Confermato/a</div>
+          </div>
+          <div class="choice-card" id="choice-forse" onclick="selectChoice('forse')">
+            <div class="choice-icon">🤔</div>
+            <div class="choice-label">Forse</div>
+            <div class="choice-sub">Sto valutando</div>
+          </div>
+          <div class="choice-card" id="choice-no" onclick="selectChoice('no')">
+            <div class="choice-icon">😢</div>
+            <div class="choice-label">Purtroppo no</div>
+            <div class="choice-sub">Non riesco</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card" id="card-ospiti" style="display:none">
+        <h3>👥 Porti qualcuno?</h3>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>Numero adulti (incluso te) <span class="required-star">*</span></label>
+            <select id="p2-adulti">
+              <option value="1">1 — solo io</option>
+              <option value="2">2 — io + 1</option>
+              <option value="3">3 — io + 2</option>
+              <option value="4">4 — io + 3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bambini (0–12 anni)</label>
+            <select id="p2-bambini">
+              <option value="0">Nessuno</option>
+              <option value="1">1 bambino</option>
+              <option value="2">2 bambini</option>
+              <option value="3">3 bambini</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>Data arrivo prevista</label>
+            <select id="p2-arrivo">
+              <option value="17">17 Agosto (check-in ufficiale)</option>
+              <option value="18">18 Agosto</option>
+              <option value="19">19 Agosto</option>
+              <option value="16">16 Agosto (anticipo)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Data partenza prevista</label>
+            <select id="p2-partenza">
+              <option value="30">30 Agosto (check-out ufficiale)</option>
+              <option value="29">29 Agosto</option>
+              <option value="28">28 Agosto</option>
+              <option value="31">31 Agosto (proroga)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Porto il cane? 🐕</label>
+            <select id="p2-cane">
+              <option value="no">No</option>
+              <option value="1">Sì, 1 cane</option>
+              <option value="2">Sì, 2 cani</option>
+            </select>
+            <span class="hint">La villa ammette animali domestici!</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Esigenze alimentari</label>
+            <input type="text" id="p2-dieta" placeholder="Es. vegetariano, celiaco, allergie...">
+          </div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevPage(2)">← Indietro</button>
+        <button class="btn-next" onclick="nextPage(2)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3: CAMERA -->
+    <div class="form-page" id="page-3">
+      <div class="section-label">Passo 3 di 5</div>
+      <h2>Quale camera preferisci?</h2>
+      <div class="form-card">
+        <h3>🛏️ Scegli una camera (prima scelta)</h3>
+        <p style="font-size:.82rem;margin-bottom:.5rem;">Le assegnazioni definitive si decidono in gruppo. Indica la tua preferenza — chi arriva prima viene accontentato!</p>
+        <div class="camere-floor">
+          <div class="floor-label">🏠 Piano terra</div>
+          <div class="camere-grid-pick">
+            <div class="camera-pick" id="cam-1" onclick="selectCamera('Camera 1')">
+              <div class="cp-icon">🛏️</div>
+              <div class="cp-name">Camera 1</div>
+              <div class="cp-desc">Matrimoniale grande · Vista piscina</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+            <div class="camera-pick" id="cam-2" onclick="selectCamera('Camera 2')">
+              <div class="cp-icon">🛏️</div>
+              <div class="cp-name">Camera 2</div>
+              <div class="cp-desc">Matrimoniale · Piano terra</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+          </div>
+          <div class="floor-label">🏠 Primo piano</div>
+          <div class="camere-grid-pick">
+            <div class="camera-pick" id="cam-3" onclick="selectCamera('Camera 3')">
+              <div class="cp-icon">🛏️🛏️</div>
+              <div class="cp-name">Camera 3</div>
+              <div class="cp-desc">2 letti singoli (unibili)</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+            <div class="camera-pick" id="cam-4" onclick="selectCamera('Camera 4')">
+              <div class="cp-icon">🛏️🛏️</div>
+              <div class="cp-name">Camera 4</div>
+              <div class="cp-desc">2 letti singoli (unibili)</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+            <div class="camera-pick" id="cam-5" onclick="selectCamera('Camera 5')">
+              <div class="cp-icon">🛏️</div>
+              <div class="cp-name">Camera 5</div>
+              <div class="cp-desc">Matrimoniale grande</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+          </div>
+          <div class="floor-label">🏡 Dependance separata</div>
+          <div class="camere-grid-pick">
+            <div class="camera-pick" id="cam-dep" onclick="selectCamera('Dependance')">
+              <div class="cp-icon">🏡</div>
+              <div class="cp-name">Dependance</div>
+              <div class="cp-desc">Matrimoniale + singolo + culla · Bagno privato · Ingresso indipendente</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+            <div class="camera-pick" id="cam-ind" onclick="selectCamera('Indifferente')">
+              <div class="cp-icon">😊</div>
+              <div class="cp-name">Indifferente</div>
+              <div class="cp-desc">Qualsiasi camera va bene per me</div>
+              <div class="cp-tag-sel">✓ Scelta</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>💬 Note sulla camera</h3>
+        <div class="form-group">
+          <label>Preferenze o richieste</label>
+          <textarea id="p3-note-camera" placeholder="Es. ho bisogno di un letto aggiunto, preferisco stare vicino a..."></textarea>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevPage(3)">← Indietro</button>
+        <button class="btn-next" onclick="nextPage(3)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- PAGE 4: TRASPORTO -->
+    <div class="form-page" id="page-4">
+      <div class="section-label">Passo 4 di 5</div>
+      <h2>Come arrivi?</h2>
+      <div class="form-card">
+        <h3>✈️ Modalità di trasporto</h3>
+        <div class="trasporto-grid">
+          <div class="trasporto-pick" id="tr-aereo" onclick="selectTrasporto('aereo')">
+            <div class="tp-icon">✈️</div>
+            <div class="tp-label">Aereo</div>
+          </div>
+          <div class="trasporto-pick" id="tr-traghetto" onclick="selectTrasporto('traghetto')">
+            <div class="tp-icon">⛴️</div>
+            <div class="tp-label">Traghetto + auto</div>
+          </div>
+          <div class="trasporto-pick" id="tr-auto" onclick="selectTrasporto('auto')">
+            <div class="tp-icon">🚗</div>
+            <div class="tp-label">Solo auto</div>
+          </div>
+          <div class="trasporto-pick" id="tr-tbd" onclick="selectTrasporto('da decidere')">
+            <div class="tp-icon">🤷</div>
+            <div class="tp-label">Da decidere</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card" id="card-auto-noleggio">
+        <h3>🚗 Auto in villa</h3>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>Porto un'auto in villa?</label>
+            <select id="p4-auto">
+              <option value="si">Sì, porto la mia auto</option>
+              <option value="noleggio">Sì, noleggierò in aeroporto</option>
+              <option value="no">No, mi aggrego ad altri</option>
+              <option value="tbd">Da decidere</option>
+            </select>
+            <span class="hint">Servono almeno 2 auto per il gruppo</span>
+          </div>
+          <div class="form-group">
+            <label>Posti disponibili in auto (se porti)</label>
+            <select id="p4-posti">
+              <option value="">—</option>
+              <option value="1">1 posto libero</option>
+              <option value="2">2 posti liberi</option>
+              <option value="3">3 posti liberi</option>
+              <option value="4">4 posti liberi</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>💬 Note sul viaggio</h3>
+        <div class="form-group">
+          <textarea id="p4-note-trasporto" placeholder="Es. ho già il volo prenotato il 17 agosto 09:30, cerco compagno di viaggio..."></textarea>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevPage(4)">← Indietro</button>
+        <button class="btn-next" onclick="nextPage(4)">Avanti →</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5: RIEPILOGO -->
+    <div class="form-page" id="page-5">
+      <div class="section-label">Passo 5 di 5</div>
+      <h2>Riepilogo iscrizione</h2>
+
+      <div class="costo-card" id="costo-card" style="display:none">
+        <h3>💶 Costo stimato</h3>
+        <div class="costo-row"><span class="costo-label">Quota villa (stima 8–10 persone)</span><span class="costo-value">~800 € / persona</span></div>
+        <div class="costo-row"><span class="costo-label">Furgone per gli spostamenti</span><span class="costo-value">~200 € / persona</span></div>
+        <div class="costo-row"><span class="costo-label">Fondo spese iniziale (barbecue, escursioni…)</span><span class="costo-value">~200 € / persona</span></div>
+        <div class="costo-row"><span class="costo-label">Durata</span><span class="costo-value">13 notti (17–30 Agosto)</span></div>
+        <div class="costo-total-row"><span class="costo-total-label">TOTALE STIMATO</span><span class="costo-total-value" id="costo-totale">1.200 €</span></div>
+        <div class="costo-acconto">⚠️ Quota tutto incluso · il prezzo finale si aggiusta sul numero di partecipanti</div>
+      </div>
+
+      <div class="form-card">
+        <h3>📋 I tuoi dati</h3>
+        <div id="riepilogo-contenuto"></div>
+      </div>
+
+      <div class="form-card">
+        <h3>📝 Note finali</h3>
+        <div class="form-group">
+          <label>Domande o altro che vuoi aggiungere</label>
+          <textarea id="p5-note" placeholder="Hai domande? Vuoi proporre qualcosa per il programma? Scrivici qui..."></textarea>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="submitForm()">🎉 Invia iscrizione!</button>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevPage(5)">← Indietro</button>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- CONFERMA -->
+    <div class="form-page" id="page-conferma">
+      <div class="conferma-box">
+        <div class="conferma-icon">🌊</div>
+        <h2>Benvenuto/a in Sardegna!</h2>
+        <p>La tua iscrizione è stata registrata. Verrai aggiunto/a alla lista del gruppo e riceverai tutti gli aggiornamenti via email.</p>
+        <div class="conferma-detail" id="conferma-detail"></div>
+        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
+          <a class="btn-back-home" href="#dashboard" onclick="scrollToDashboard()">👥 Vedi chi viene</a>
+          <a class="btn-back-home" href="index.html" style="background:transparent;border:2px solid var(--sea);color:var(--sea);">← Torna alla home</a>
+          <button class="btn-new" onclick="resetForm()">Iscrivere un'altra persona</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="container">
+    <div class="section-label">Partecipanti</div>
+    <h2>Chi viene a Villa Sara</h2>
+    <div class="stat-grid" id="stat-grid">
+      <div class="stat-box"><div class="stat-num green" id="stat-si">0</div><div class="stat-label">Confermati</div></div>
+      <div class="stat-box"><div class="stat-num yellow" id="stat-forse">0</div><div class="stat-label">Forse</div></div>
+      <div class="stat-box"><div class="stat-num red" id="stat-no">0</div><div class="stat-label">Non vengono</div></div>
+      <div class="stat-box"><div class="stat-num blue" id="stat-posti">0</div><div class="stat-label">Posti auto liberi</div></div>
+    </div>
+    <div class="part-list" id="part-list">
+      <!-- Sara Jane sempre presente -->
+      <div class="part-row">
+        <div class="part-av" style="background:#1A6B8A">SJ</div>
+        <div class="part-main">
+          <div class="part-name">Sara Jane</div>
+          <div class="part-meta">🏠 Ha casa ad Alghero · sarà la nostra guida locale!</div>
+          <div class="part-badges"><span class="pb pb-si">✅ Confermata</span><span class="pb pb-camera">🏡 Locale</span></div>
+        </div>
+        <div class="part-date">Organizzatrice</div>
+      </div>
+    </div>
+    <div id="no-part-msg" style="display:none" class="no-part">Sii il primo a iscriverti! ↑</div>
+    <button class="clear-btn" onclick="clearAll()" id="clear-btn" style="display:none">🗑️ Cancella tutti i dati (solo locale)</button>
+
+    <div style="margin-top:2rem;">
+      <div class="section-label" style="color:var(--sea-light);margin-bottom:0.8rem;">Stato camere</div>
+      <div class="camere-status" id="camere-status"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>🌊 <strong style="color:#fff">Vacanze Venti Ventisei</strong> · Villa Sara · Alghero · 17–30 Agosto 2026</p>
+  <p style="margin-top:0.5rem"><a href="https://www.airbnb.it/rooms/9536949" target="_blank">airbnb.it/rooms/9536949</a> · ★ 4,67 su 39 recensioni</p>
+  <p style="margin-top:0.5rem"><a href="index.html">← Torna alla pagina principale</a></p>
+</footer>
+
+<script>
+const CAMERE_INFO = {
+  'Camera 1':    { desc:'Matrimoniale · vista piscina · piano terra', icon:'🛏️' },
+  'Camera 2':    { desc:'Matrimoniale grande · piano terra', icon:'🛏️' },
+  'Camera 3':    { desc:'2 singoli (unibili) · primo piano', icon:'🛏️🛏️' },
+  'Camera 4':    { desc:'2 singoli (unibili) · primo piano', icon:'🛏️🛏️' },
+  'Camera 5':    { desc:'Matrimoniale grande · primo piano', icon:'🛏️' },
+  'Dependance':  { desc:'Matrimoniale + singolo + culla · bagno privato', icon:'🏡' },
+  'Indifferente':{ desc:'Qualsiasi camera', icon:'😊' },
+};
+const COLORS = ['#1A6B8A','#E07050','#6B7A3E','#7060A0','#C07030','#2A7A9A','#A03060','#2A6A4A'];
+const STORAGE_KEY = 'vacanze2026_part';
+
+let currentPage = 1;
+let selectedPartecipo = '';
+let selectedCamera = '';
+let selectedTrasporto = '';
+
+// ── PARTECIPANTS STORAGE ──
+function getParticipants() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+}
+function saveParticipants(list) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+}
+
+// ── PROGRESS ──
+function updateProgress(page) {
+  const total = 5;
+  for (let i = 1; i <= total; i++) {
+    const el = document.getElementById('step-' + i);
+    el.className = 'step' + (i < page ? ' done' : i === page ? ' active' : '');
+    el.querySelector('.step-dot').textContent = i < page ? '✓' : i;
+  }
+  const pct = ((page - 1) / (total - 1)) * 100;
+  document.getElementById('progress-line').style.width = pct + '%';
+}
+
+// ── PAGE NAV ──
+function goToPage(page) {
+  document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+  const target = page === 'conferma' ? document.getElementById('page-conferma') : document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+  if (page !== 'conferma') { currentPage = page; updateProgress(page); }
+  window.scrollTo({ top: document.getElementById('form').offsetTop - 60, behavior: 'smooth' });
+}
+
+function nextPage(from) {
+  if (from === 1) {
+    if (!document.getElementById('p1-nome').value.trim()) { alert('Inserisci il tuo nome!'); return; }
+    if (!document.getElementById('p1-cognome').value.trim()) { alert('Inserisci il cognome!'); return; }
+    const email = document.getElementById('p1-email').value.trim();
+    if (!email || !email.includes('@')) { alert('Inserisci un\'email valida!'); return; }
+  }
+  if (from === 2) {
+    if (!selectedPartecipo) { alert('Seleziona se partecipi!'); return; }
+    if (selectedPartecipo === 'no') { buildRiepilogo(); goToPage(5); return; }
+  }
+  if (from === 3) {
+    if (!selectedCamera) { alert('Seleziona una preferenza di camera!'); return; }
+  }
+  if (from === 4) {
+    if (!selectedTrasporto) { alert('Seleziona la modalità di trasporto!'); return; }
+    buildRiepilogo();
+  }
+  goToPage(from + 1);
+}
+function prevPage(from) { goToPage(from - 1); }
+
+// ── SELECTIONS ──
+function selectChoice(val) {
+  selectedPartecipo = val;
+  ['si','forse','no'].forEach(v => {
+    const el = document.getElementById('choice-' + v);
+    el.className = 'choice-card';
+    if (v === val) {
+      el.classList.add(v === 'si' ? 'selected' : v === 'forse' ? 'selected-olive' : 'selected-coral');
+    }
+  });
+  document.getElementById('card-ospiti').style.display = (val !== 'no') ? 'block' : 'none';
+}
+
+function selectCamera(name) {
+  selectedCamera = name;
+  document.querySelectorAll('.camera-pick').forEach(el => el.classList.remove('selected'));
+  const map = { 'Camera 1':'cam-1','Camera 2':'cam-2','Camera 3':'cam-3','Camera 4':'cam-4','Camera 5':'cam-5','Dependance':'cam-dep','Indifferente':'cam-ind' };
+  if (map[name]) document.getElementById(map[name]).classList.add('selected');
+}
+
+function selectTrasporto(val) {
+  selectedTrasporto = val;
+  ['aereo','traghetto','auto','tbd'].forEach(v => {
+    document.getElementById('tr-' + v).classList.remove('selected');
+  });
+  document.getElementById('tr-' + (val === 'da decidere' ? 'tbd' : val === 'traghetto' ? 'traghetto' : val)).classList.add('selected');
+}
+
+// ── RIEPILOGO ──
+function buildRiepilogo() {
+  const nome = document.getElementById('p1-nome').value.trim() + ' ' + document.getElementById('p1-cognome').value.trim();
+  const email = document.getElementById('p1-email').value.trim();
+  const tel = document.getElementById('p1-tel').value.trim();
+  const citta = document.getElementById('p1-citta').value.trim();
+  const adulti = document.getElementById('p2-adulti').value || '1';
+  const bambini = document.getElementById('p2-bambini').value || '0';
+  const cane = document.getElementById('p2-cane').value || 'no';
+
+  const partLabel = { si:'✅ Confermato/a', forse:'🤔 Forse', no:'❌ Non partecipo' }[selectedPartecipo] || '';
+  const transLabel = { aereo:'✈️ Aereo', traghetto:'⛴️ Traghetto + auto', auto:'🚗 Solo auto', 'da decidere':'🤷 Da decidere' }[selectedTrasporto] || '';
+  const caneLabel = cane === 'no' ? '—' : cane === '1' ? '🐕 1 cane' : '🐕🐕 2 cani';
+
+  const rows = [
+    ['Nome', nome],
+    ['Email', email],
+    ['Telefono', tel || '—'],
+    ['Città', citta || '—'],
+    ['Partecipazione', partLabel],
+    ['Adulti', adulti],
+    ['Bambini', bambini === '0' ? '—' : bambini],
+    ['Cane', caneLabel],
+    ['Camera preferita', selectedCamera || '—'],
+    ['Trasporto', transLabel],
+  ].filter(r => r[1] && r[1] !== '—' || r[0] === 'Nome');
+
+  document.getElementById('riepilogo-contenuto').innerHTML = rows.map(([k, v]) =>
+    `<div style="display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid #F0EDE8;font-size:.84rem;">
+      <span style="color:var(--muted)">${k}</span><span style="font-weight:600;color:var(--night)">${v}</span>
+    </div>`
+  ).join('');
+
+  if (selectedPartecipo === 'si') {
+    document.getElementById('costo-card').style.display = 'block';
+    const n = parseInt(adulti);
+    document.getElementById('costo-totale').textContent = (1200 * n).toLocaleString('it-IT') + ' €';
+  } else {
+    document.getElementById('costo-card').style.display = 'none';
+  }
+}
+
+// ── SUBMIT ──
+function submitForm() {
+  const nome = document.getElementById('p1-nome').value.trim() + ' ' + document.getElementById('p1-cognome').value.trim();
+  const email = document.getElementById('p1-email').value.trim();
+  const tel = document.getElementById('p1-tel').value.trim();
+  const citta = document.getElementById('p1-citta').value.trim();
+  const adulti = parseInt(document.getElementById('p2-adulti').value || '1');
+  const bambini = parseInt(document.getElementById('p2-bambini').value || '0');
+  const arrivo = document.getElementById('p2-arrivo').value || '17';
+  const partenza = document.getElementById('p2-partenza').value || '30';
+  const cane = document.getElementById('p2-cane').value || 'no';
+  const dieta = document.getElementById('p2-dieta').value.trim();
+  const noteCamera = document.getElementById('p3-note-camera').value.trim();
+  const autoPorta = document.getElementById('p4-auto').value || 'no';
+  const posti = document.getElementById('p4-posti').value || '0';
+  const noteTrasporto = document.getElementById('p4-note-trasporto').value.trim();
+  const noteFinali = document.getElementById('p5-note').value.trim();
+
+  const entry = {
+    nome, email, tel, citta,
+    partecipo: selectedPartecipo,
+    adulti, bambini,
+    arrivo: '17 Ago', partenza: '30 Ago',
+    cane, dieta,
+    camera: selectedCamera,
+    noteCamera,
+    trasporto: selectedTrasporto,
+    autoPorta,
+    posti: parseInt(posti) || 0,
+    noteTrasporto,
+    noteFinali,
+    ts: new Date().toISOString(),
+  };
+
+  const list = getParticipants();
+  list.push(entry);
+  saveParticipants(list);
+
+  // Conferma
+  const partLabel = { si:'✅ Confermato/a', forse:'🤔 Forse', no:'❌ Non partecipo' }[selectedPartecipo];
+  document.getElementById('conferma-detail').innerHTML = `
+    <div class="cd-row"><span class="cd-key">Nome</span><span class="cd-val">${nome}</span></div>
+    <div class="cd-row"><span class="cd-key">Partecipazione</span><span class="cd-val">${partLabel}</span></div>
+    ${selectedCamera ? `<div class="cd-row"><span class="cd-key">Camera</span><span class="cd-val">${selectedCamera}</span></div>` : ''}
+    ${selectedTrasporto ? `<div class="cd-row"><span class="cd-key">Trasporto</span><span class="cd-val">${selectedTrasporto}</span></div>` : ''}
+    <div class="cd-row"><span class="cd-key">Email</span><span class="cd-val">${email}</span></div>
+  `;
+
+  goToPage('conferma');
+  renderDashboard();
+}
+
+function resetForm() {
+  selectedPartecipo = '';
+  selectedCamera = '';
+  selectedTrasporto = '';
+  ['p1-nome','p1-cognome','p1-email','p1-tel','p1-citta',
+   'p2-dieta','p3-note-camera','p4-note-trasporto','p5-note'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.querySelectorAll('.choice-card').forEach(el => el.className = 'choice-card');
+  document.querySelectorAll('.camera-pick').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.trasporto-pick').forEach(el => el.classList.remove('selected'));
+  document.getElementById('card-ospiti').style.display = 'none';
+  goToPage(1);
+}
+
+function scrollToDashboard() {
+  setTimeout(() => {
+    document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+  }, 100);
+}
+
+// ── DASHBOARD ──
+function renderDashboard() {
+  const list = getParticipants();
+  const si = list.filter(p => p.partecipo === 'si').length;
+  const forse = list.filter(p => p.partecipo === 'forse').length;
+  const no = list.filter(p => p.partecipo === 'no').length;
+  const posti = list.reduce((acc, p) => acc + (p.posti || 0), 0);
+
+  document.getElementById('stat-si').textContent = si;
+  document.getElementById('stat-forse').textContent = forse;
+  document.getElementById('stat-no').textContent = no;
+  document.getElementById('stat-posti').textContent = posti;
+
+  const container = document.getElementById('part-list');
+  // remove dynamic entries (keep Sara Jane — first child)
+  while (container.children.length > 1) container.removeChild(container.lastChild);
+
+  if (list.length === 0) {
+    document.getElementById('no-part-msg').style.display = 'block';
+    document.getElementById('clear-btn').style.display = 'none';
+  } else {
+    document.getElementById('no-part-msg').style.display = 'none';
+    document.getElementById('clear-btn').style.display = 'block';
+    list.forEach((p, i) => {
+      const initials = p.nome.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      const color = COLORS[i % COLORS.length];
+      const partBadge = { si:'<span class="pb pb-si">✅ Confermato/a</span>', forse:'<span class="pb pb-forse">🤔 Forse</span>', no:'<span class="pb pb-no">❌ No</span>' }[p.partecipo] || '';
+      const camBadge = p.camera && p.camera !== 'Indifferente' ? `<span class="pb pb-camera">🛏️ ${p.camera}</span>` : '';
+      const trBadge = p.trasporto ? `<span class="pb pb-trasporto">${{aereo:'✈️',traghetto:'⛴️',auto:'🚗','da decidere':'🤷'}[p.trasporto]||''} ${p.trasporto}</span>` : '';
+      const caneBadge = p.cane && p.cane !== 'no' ? `<span class="pb pb-cane">🐕 ${p.cane} cane</span>` : '';
+      const meta = [p.citta, p.adulti > 1 ? p.adulti + ' adulti' : null].filter(Boolean).join(' · ');
+      const date = new Date(p.ts).toLocaleDateString('it-IT', { day:'2-digit', month:'short' });
+      const row = document.createElement('div');
+      row.className = 'part-row';
+      row.innerHTML = `
+        <div class="part-av" style="background:${color}">${initials}</div>
+        <div class="part-main">
+          <div class="part-name">${p.nome}</div>
+          ${meta ? `<div class="part-meta">${meta}</div>` : ''}
+          <div class="part-badges">${partBadge}${camBadge}${trBadge}${caneBadge}</div>
+        </div>
+        <div class="part-date">${date}</div>`;
+      container.appendChild(row);
+    });
+  }
+
+  // Camere status
+  const camereConf = ['Camera 1','Camera 2','Camera 3','Camera 4','Camera 5','Dependance'];
+  const camereEl = document.getElementById('camere-status');
+  camereEl.innerHTML = camereConf.map(c => {
+    const info = CAMERE_INFO[c];
+    const owner = list.find(p => p.camera === c && p.partecipo !== 'no');
+    return `<div class="cs-card ${owner ? 'taken' : 'free'}">
+      <div class="cs-name">${info.icon} ${c}</div>
+      <div class="cs-desc">${info.desc}</div>
+      <div class="cs-who ${owner ? '' : 'free'}">${owner ? '👤 ' + owner.nome : '✓ Libera'}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearAll() {
+  if (confirm('Cancellare tutti i dati salvati localmente?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    renderDashboard();
+  }
+}
+
+// init
+updateProgress(1);
+renderDashboard();
+</script>
+</body>
+</html>
