@@ -14,7 +14,7 @@ body{font-family:'Inter',sans-serif;background:var(--sand);color:var(--text);ove
 
 /* ── HERO ── */
 .hero{position:relative;height:100svh;min-height:500px;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background-image:url('img/piscina.jpg'), url('https://a0.muscache.com/im/pictures/5b2ccf6c-a472-49ab-8390-dedf331f4f2b.jpg?im_w=1280');background-size:cover;background-position:center;filter:brightness(0.4);}
+.hero-bg{position:absolute;inset:0;background-image:url('img/piscina.avif'), url('https://a0.muscache.com/im/pictures/5b2ccf6c-a472-49ab-8390-dedf331f4f2b.jpg?im_w=1280');background-size:cover;background-position:center;filter:brightness(0.4);}
 .hero-content{position:relative;z-index:2;padding:1.5rem;}
 .hero-eyebrow{font-size:0.7rem;font-weight:600;letter-spacing:0.25em;color:var(--sea-light);text-transform:uppercase;margin-bottom:1rem;}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,9vw,5.5rem);font-weight:700;color:#fff;line-height:1.1;}
@@ -284,7 +284,7 @@ img::after { content: attr(alt); display:flex; align-items:center; justify-conte
     <div class="section-label">Galleria</div>
     <h2 style="color:#fff">La villa in foto</h2>
     <div class="gallery-grid">
-      <img src="img/piscina.jpg" onerror="this.src='https://a0.muscache.com/im/pictures/5b2ccf6c-a472-49ab-8390-dedf331f4f2b.jpg?im_w=1280'" alt="Piscina villa Sara" onclick="openLightbox(this.src)" loading="lazy">
+      <img src="img/piscina.avif" onerror="this.src='https://a0.muscache.com/im/pictures/5b2ccf6c-a472-49ab-8390-dedf331f4f2b.jpg?im_w=1280'" alt="Piscina villa Sara" onclick="openLightbox(this.src)" loading="lazy">
       <img src="img/giardino.jpg" onerror="this.src='https://a0.muscache.com/im/pictures/ae67f0c6-e930-4392-aee2-856bc23ee7a7.jpg?im_w=720'" alt="Giardino" onclick="openLightbox(this.src)" loading="lazy">
       <img src="img/living.jpg" onerror="this.src='https://a0.muscache.com/im/pictures/4695e059-4480-4eb4-94b0-4fef6ba9410c.jpg?im_w=720'" alt="Living" onclick="openLightbox(this.src)" loading="lazy">
       <img src="img/esterno.jpg" onerror="this.src='https://a0.muscache.com/im/pictures/11fb226d-58dc-481e-848d-5a28b80808f4.jpg?im_w=720'" alt="Esterni" onclick="openLightbox(this.src)" loading="lazy">
@@ -636,7 +636,7 @@ function submitRSVP(){
   Per far funzionare le foto, carica le immagini della villa
   in una cartella "img/" nel repository GitHub con questi nomi:
   
-  img/piscina.jpg     → foto principale piscina
+  img/piscina.avif     → foto principale piscina
   img/giardino.jpg    → giardino con ulivi
   img/living.jpg      → zona living/veranda
   img/esterno.jpg     → esterno villa
